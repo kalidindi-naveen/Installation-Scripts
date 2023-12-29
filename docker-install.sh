@@ -22,10 +22,10 @@ VALIDATE(){
 
 }
 
-yum update  -y &>>$LOG
+dnf update  -y &>>$LOG
 VALIDATE $? "Updating packages"
 
-amazon-linux-extras install docker -y &>>$LOG
+dnf install docker -y &>>$LOG
 VALIDATE $? "Installing Docker"
 
 service docker start &>>$LOG
@@ -37,7 +37,7 @@ VALIDATE $? "Enabling Docker"
 usermod -a -G docker ec2-user &>>$LOG
 VALIDATE $? "Added ec2-user to docker group"
 
-yum install git -y &>>$LOG
+dnf install git -y &>>$LOG
 VALIDATE $? "Installing GIT"
 
 curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose &>>$LOG
